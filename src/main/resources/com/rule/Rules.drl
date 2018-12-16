@@ -1,0 +1,32 @@
+package com.rule
+
+import com.lemmer.csvexample.data.model.InvoiceItem;
+import java.math.BigDecimal;
+
+rule "Blue Pen > 10"
+	when 
+		myItem: InvoiceItem(item_name.toLowerCase().equals("blue pen") && (item_quantity > 10))
+	then
+		myItem.setTariff(BigDecimal.valueOf(2.5));
+	end
+                
+rule "Blue Pen <= 10"
+	when 
+		myItem: InvoiceItem(item_name.toLowerCase().equals("blue pen") && (item_quantity <= 10))
+	then
+		myItem.setTariff(BigDecimal.valueOf(3));
+	end
+
+rule "Red Pen > 10"
+	when 
+		myItem: InvoiceItem(item_name.toLowerCase().equals("red pen") && (item_quantity > 10))
+	then
+		myItem.setTariff(BigDecimal.valueOf(3));
+	end
+
+rule "Red Pen <= 10"
+	when 
+		myItem: InvoiceItem(item_name.toLowerCase().equals("red pen") && (item_quantity <= 10))
+	then
+		myItem.setTariff(BigDecimal.valueOf(3.5));
+	end
